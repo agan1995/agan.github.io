@@ -1,0 +1,67 @@
+package grades;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		Fraction a = new Fraction(in.nextInt(), in.nextInt());
+		Fraction b = new Fraction(in.nextInt(),in.nextInt());
+		a.print();
+		b.print();
+		a.plus(b).print();
+		a.multiply(b).plus(new Fraction(5,6)).print();
+		a.print();
+		b.print();
+		in.close();
+	}
+
+}
+class Fraction{
+	int zi;
+	int mu;
+	Fraction(int zi,int mu){
+		this.zi=zi;
+		this.mu=mu;
+	}
+	
+	double toDouble(){
+		return (double)zi/mu;
+	}
+	
+	Fraction plus(Fraction r) {
+		Fraction s=new Fraction(0,1);
+		s.zi=zi*r.mu+r.zi*mu;
+		s.mu=mu*r.mu;
+		return s;
+	}
+	
+	Fraction multiply(Fraction r) {
+		Fraction s=new Fraction(0,1);
+		s.zi=zi*r.zi;
+		s.mu=mu*r.mu;
+		return s;
+	}
+	
+	void print(){
+		int r,x=zi,y=mu;
+		while(x!=0) 
+		{
+			r=y%x;
+			y=x;
+			x=r;
+		}
+		zi/=y;
+		mu/=y;
+		if(zi==mu)
+		{
+			System.out.println(1);
+		}
+		else
+		{
+			System.out.println(zi+"/"+mu);
+		}
+		return;
+	}
+}
